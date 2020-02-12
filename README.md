@@ -11,6 +11,12 @@ Correctness:
 while providing type checking you don't pay the overhead of object allocation
 
 
+UNAVOIDABLE ALLOCATION
+
+1. When extends an universal trait and is used as such. i.e. a method that accepts as input that universal trait
+2. When is used in an Array
+3. When is used it's type is tested at runtime. i.e when pattern matching
+
 
 
 
