@@ -1,11 +1,18 @@
+object Implicits {
+  implicit class ValueClass(val value: Int) extends AnyVal {
+
+    def toHex: String =
+      value.toString + "HOX"
+  }
+}
+
 class Bench {
+
+  import Implicits._
 
 
   def run: Unit =  {
-    println(new ValueClass(2))
-    println(new NonValueClass(20))
-    println(new ValueClass(2).toHex)
-    println(new NonValueClass(20).toHex)
+    println(2.toHex)
   }
 
 
