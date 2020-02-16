@@ -12,6 +12,6 @@ libraryDependencies ++= Seq(
   )
 
 initialCommands in console := """
-  import Bench._
+  import com.lightbend.liskov._
 """
   
