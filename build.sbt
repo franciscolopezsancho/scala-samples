@@ -12,6 +12,8 @@ libraryDependencies ++= Seq(
   )
 
 initialCommands in console := """
-  import com.lightbend.liskov._
+  import com.lightbend.selftypes._
+  import com.lightbend.selftypes.pathdependenttypes._
+  import com.lightbend.`implicit`._
 """
   
