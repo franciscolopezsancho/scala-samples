@@ -2,7 +2,7 @@ package com.lightbend.eemplitcit.implicitscope
 
 object BeforePimp extends App{
 
-  import X._
+  import XX._
   //companion objects of the type
   println(s"ttttt $f")
   //therefore
@@ -15,10 +15,10 @@ object BeforePimp extends App{
 
 
 
-trait T {
+trait TU {
   implicit val i: Int = 8
 }
-object X extends T {
+object XX extends TU {
   implicit val s: String = "hello, world\n"
   def f(implicit s: String) = implicitly[String] * implicitly[Int]
 }

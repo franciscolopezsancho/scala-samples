@@ -1,14 +1,14 @@
 package com.lightbend.eemplitcit.implicitscope
 
 class Pimp {
-
-  val cageX = new Cage[X]{
-    println(s"ttttt ${implicitly[Int]}")
-
-
-  }
-  //companion objects of the type
-  println(s"iiiiii $i")
+// TODO review
+//  val cageX = new Cage[X]{
+//    println(s"ttttt ${implicitly[Int]}")
+//
+//
+//  }
+//  //companion objects of the type
+//  println(s"iiiiii $i")
 
 
 }
