@@ -1,15 +1,31 @@
-package com.lightbend
+package com.lightbend.packagess
+
 package adapter
 
-class Bench {
+import java.util.concurrent.Executors
 
-  //not only add to the package it self
+import scala.concurrent.{Await, ExecutionContext, Future}
 
-  def run: Unit =  {
+/**
+ * package com.lightbend.packagess
+ * package adapter
+ *
+ * Allow you two things:
+ * 1. refer to deeper packages without referencing from the beginning of the path
+ * 2. refer not only to its base package members `com.lightbend.packagess` but also to a specific one `adapter`
+ *
+ * Generally, if your project consists of multiple subpackages, it's a good idea to use a first package clause that names the project as a whole and is followed by a second package clause naming the current subpackage.
+ * That way, you can refer to other subpackages of your project without the often long prefix that indicates the project.
+ */
+object Bench extends App {
+    import scala.concurrent.duration._
 
+    //1. handy
+    println(level.two.DeepDown)
+
+    //2. flexible
     println(adapterMethod)
-    // will not compile println(scaladslMethod)
-  }
+    println(commonMethod)
 
 
 

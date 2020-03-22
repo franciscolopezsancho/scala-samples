@@ -1,33 +1,57 @@
 package com.lightbend.variance
 
+/**
+ * Is about defining the possible IMPLEMENTATIONS but NOT about using it. @see 36
+ *
+ * goto ..implicits.parameters.typeclasses._
+ *
+ */
 object PolimorphismParametric {
 
   class Animal
   class Bird extends Animal
 
 
-  //let's try invariance, covariance and contravariance
-  class Box[T]
+  //invariance
+  class BoxInv[T]
 
-  val a: Box[Animal] = new Box[Animal]
+  val inv: BoxInv[Animal] = new BoxInv[Animal]
+
+  //convariance
+  class BoxCov[+T]
+
+  val cov: BoxCov[Animal] = new BoxCov[Bird]()
+
+
+  //contravariance
+  class BoxContr[-T]
+
+  val contr: BoxContr[Bird] = new BoxContr[Animal]()
 
 
 
 
-  //remember field params
-  class Container[T](val content: T)
-  
-  //method content behaves as Covariant!!!!
+  // GENERICS != AdHoc
+  class Container[+T](val content: T) //remember this is a getter
+  //method content behaves as Covariant?
+
   val b: Container[Animal] = new Container(new Bird)
+  // GENERICS != AdHoc
+  // this sample shows polimorphism AdHoc
   
 
 
 
-  //conandrums
 
-  //see Function0[+R]
-  //see Function1[-T,+R]
-  //why it does not complaing, after all is invariant in covarian/contravarian position
+  // How rules of Generics work on building implementations
+
+
+  // COVARIANT + in OUTPUT
+  val f0: scala.Function0[Animal] = () => new Bird
+  // CONTRAVARIANT in the INPUT
+  val f1: scala.Function1[Bird,Number] = (bird: Animal) => 2
+
+  // if INVARIANT then all is good
   class Cage[A,B](val content: A) {
     def getter: A = // covariant or invariant
       content
@@ -39,20 +63,8 @@ object PolimorphismParametric {
       content
   }
 
-  //how can I pass a subtype in a contravariant position?
-  class Parcel[T] {
 
-    def boo(t: T): Unit =
-      println("hello, world")
-  }
-
-  val bA = new Box[Animal] 
-  // WILL NOT COMPILE bA.boo(new Bird())
-  //answer this is subtypying
-  //
-
-
-  // variance is about the relation of COMPOSITE types, themselves, not values
+  // variance is about the relation of COMPOSITE types, themselves, their definitions not the values we pass
   //    is about rules over the definition of the val,var,and defs under Parametric Polimorphism
   //    , no about the rules how to assign them nor use them
   //    Also Functions are COMPOSITE types

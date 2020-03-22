@@ -1,7 +1,11 @@
-package com.lightbend.adapter
+package com.lightbend.packagess.adapter
 
+/**
+ * We can use here what was previously defined in package object
+ */
+//TODO missing composition
 class TcpAdapter {
 
-  def useYourPackage: Unit =
-    adapterMethod
+    println(adapterMethod)
+
 }

@@ -1,6 +1,19 @@
 package com.lightbend.liskov
 
-object PolimorphismSubtyping {
+/**
+ * METHOD OVERRIDING @see line 27
+ *
+ * LATE BINDING
+ * GOOD for ADT easy to add new data without modifying existing code?
+ *    but you'll break all the pattern matching
+ * LIMITATIONS
+ *    only one implementation per type
+ *    complex/inflexible hierarchies
+ *        as when you want to change the supertype all subtypes will be affected
+ *        something else?
+ *    return-current-type problem?
+ */
+object PolimorphismSubtyping extends App {
 
   trait Animal {
     def name: String
@@ -20,8 +33,6 @@ object PolimorphismSubtyping {
   val jimB: Bird = new Bird("jim")
 
   //late binding or early binding?
-  def run: Unit = {
     println(sayHi(johnA))
     println(sayHi(jimB))
-  }
 }
