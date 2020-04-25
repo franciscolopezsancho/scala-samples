@@ -31,3 +31,28 @@ object Punchline extends App {
 
 
 }
+
+/**
+ * a bit of history
+ * before 2.8
+ *  
+ * package org {
+ *       package myproject {
+ *         package tests {
+ *           ...
+ *         }
+ *       }
+ *     }
+ *  They all meant the same. In Scala 2.8 this has changed. The difference is that the package clause:
+ * 
+ *     package org.myproject.tests
+ *  now only brings the members of the org.myproject.tests in scope, but not the members of the two outer packages org.myproject and org. If you want to have the members of both tests and org.myproject in scope you need to use the two nested package clauses above, or else the chained equivalent:
+ * 
+ *     package org.myproject // myproject members are visible, but not org members
+ *     package tests         // test members are visible
+ * 
+ * 
+ *  https://www.artima.com/scalazine/articles/chained_package_clauses_in_scala.html
+ * 
+ * 
+ **/

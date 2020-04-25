@@ -2,9 +2,13 @@ package com.theory.variance
 
 import scala.reflect.ClassManifest
 import scala.reflect.ClassTag
+import java.sql.Date
 
 /**
- * Is about defining the possible IMPLEMENTATIONS but NOT about using it. @see 36
+ * There are two fundamental level at which variance can be seen"
+ * 
+ *  1. In combination with the Liskov principle. When subtitution has place
+ *  2. In itself when defininig a Polimorphic Paremtrized template, where some limitations must be respected
  *
  * goto ..implicits.parameters.typeclasses._
  * 
@@ -14,10 +18,10 @@ import scala.reflect.ClassTag
  * 
  * But if there's no subtyping (like Haskell)
  * 
- * having a Container[A] that you want to use as a Container[B] is let say A -> B. 
+ * having a Container[A] that you want to use as a Container[B] is let say A -> B. A = Bird and B = Animal
  * 
  * in scala{
- *  val cont: Container[B] = new Container[A]
+ *  val cont: Container[Animal] = new Container[Bird]
  * }
  * 
  *  Container is covariant if you need a function such as A => B to allow such behavior (same direction) 
@@ -33,7 +37,6 @@ import scala.reflect.ClassTag
  * 
  */
 object PolimorphismParametric {
-  
 
   class Animal
   class Bird extends Animal

@@ -21,6 +21,14 @@ object CallbackHell extends App {
   def divideAnAlter(num: BigInt, denom: BigInt,alter: BigInt => BigInt): Future[BigInt] =
     Future(alter(num / denom))
 
+  def nonBlockingTask(millis: Long): Unit = {
+    val now = System.currentTimeMillis()
+    println(s"### ${Thread.currentThread.getName} WORKING...")
+    while(now + millis < System.currentTimeMillis()){}
+    println(s"### ${Thread.currentThread.getName} FINISHED TASK")
+
+  }
+
   def asyncFactorial(n: Int): Future[BigInt] = Future((BigInt(1) to BigInt(n)).product)
 
   val factorialInput1 = 220
@@ -41,7 +49,7 @@ object CallbackHell extends App {
 
 
   /**
-  * Recommemded: desugarcode above
+   * 
   */
   val r = for { // flatMaps
     f1 <- asyncFactorial(factorialInput1)

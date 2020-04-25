@@ -14,8 +14,8 @@ import scala.util.Random
 object FutureFailure extends App {
 
   implicit val ec = ExecutionContext.fromExecutor(Executors.newFixedThreadPool(10)) 
-  //do nothing about it
-  def shortVersionDivideAndAlter(num: BigInt, denom: BigInt, f: BigInt => Unit) =
+  //do nothing about it, will ignore it. As get's a Try[Failure] and won't short circuit the map
+  def silentVersionDivideAndAlter(num: BigInt, denom: BigInt, f: BigInt => Unit) =
     Future(num / denom).map(f)
 
   //handle it like this
@@ -51,18 +51,19 @@ object FutureFailure extends App {
   }
   
 
-  
-  shortVersionDivideAndAlter(1, 0, println)
+  // try one at a time 
+  silentVersionDivideAndAlter(1, 0, println)
 
   noisyVersionDivideAndAlter(1, 0, println)
 
-  recoverFromZero(1, 0, println)
+  // recoverFromZero(1, 0, println)
 
-  retrySideEffect(5, printAndFail("testing spawning alternative Futures"))
-
-
+  // retrySideEffect(5, printAndFail("testing spawning alternative Futures"))
 
 
+
+  Thread.sleep(100)
+  System.exit(0)
 
 
 }

@@ -1,5 +1,16 @@
 package com.theory.concurrency
 
+
+/**
+  * A good way to look at concurrency is like turning the code 90 degrees to the left
+  * and read from left to right 
+  * when an async computations arise will desapear, as a cannon ball, code keeps running
+  * to the right and eventually the result falls back
+  * 
+  * two thoughts. If you put as below a join then you'll stop reading to the right
+  *     When the results gets back could hit another thread and then you could visualize that the 
+  *     code has depth. 
+  */
 object NonDeterministicLog extends App {
 
   def threadThis(body: => Unit): Thread = {

@@ -17,6 +17,8 @@ object Composition extends App {
   def f1(x: A): Future[Seq[B]] = ???
   def f2(x: B): Future[Option[C]] = ???
 
+  
+
   def composed(a: A)(implicit ec: ExecutionContext): Future[Seq[Option[C]]] =
     for {
       bs <- f1(a)

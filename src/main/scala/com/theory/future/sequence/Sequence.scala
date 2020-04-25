@@ -55,5 +55,6 @@ object MyOwnSequence extends App {
   }
 
   listFutures.map(println)
+  Thread.sleep(100)
   System.exit(0)
 }

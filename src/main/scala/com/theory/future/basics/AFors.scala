@@ -7,6 +7,7 @@ import scala.concurrent.{ExecutionContext, Future}
 
 /**
  * Future will run the operation in another thread, but EAGER!
+ * One way of looking at a scala.concurrent.Future is that it’s an “Eventually[Try[_]]”, in other
  */
 object AFors extends App {
 
@@ -24,7 +25,7 @@ object AFors extends App {
   println("while factorial is running I'm doing somehing else. Namely, printing this")
 
 
-  // map has an underlying `transform` that will wrap the `map` function A => B in Try[A] => Try[B]
+  // map has an underlying `transform` that will wrap the `map` function A => B in Try[A] => Try[B] @see top
   // IF Success
   // so is equivalent to call onComplete Success
   // TODO why there's an implementation and one abstract?
