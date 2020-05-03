@@ -250,8 +250,8 @@ object CancelFutureElegant extends App {
       block: Future[T] => T
   )(implicit ec: ExecutionContext): (Future[T], () => Boolean) = {
     val cancellablePromise = Promise[T]()
-    val future = Future(block(cancellablePromise.future))
-    cancellablePromise.completeWith(future)
+    val future = cancellablePromise.future
+    cancellablePromise.completeWith(Future(block(future)))
     (future, () => cancellablePromise.tryFailure(new CancellationException))
   }
 
@@ -260,7 +260,7 @@ object CancelFutureElegant extends App {
 
   val (futureResult, cancellator) = cancellableFuture[Int]( trigger => {
     var i = 0
-    while (!trigger.isCompleted) {
+    while (!trigger.isCompleted && i < 10) {
       Thread.sleep(500)
       println(s"iteration $i .. still working")
       i += 1
@@ -269,10 +269,14 @@ object CancelFutureElegant extends App {
   })
 
 
-  Thread.sleep(1500)
+  // Thread.sleep(1500)
   println("let's  cancel!")
-  val isCancelled = cancellator()
-  println(s"computational cancelled is: $isCancelled")
-  Thread.sleep(100) // will let show the work Future is still doing 
+  futureResult.onComplete{
+    case Success(value) => println(value)
+    case Failure(exception) => println(exception)
+  }
+  // val isCancelled = cancellator()
+  //println(s"computational cancelled is: $isCancelled")
+  Thread.sleep(10000) // will let show the work Future is still doing 
   System.exit(0)
 }
