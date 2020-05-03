@@ -4,7 +4,6 @@ package adapter
 
 import java.util.concurrent.Executors
 
-import scala.concurrent.{Await, ExecutionContext, Future}
 
 /**
  * package com.lightbend.packagess
