@@ -14,4 +14,10 @@ object Workbench extends App {
   def factorial(n: Int, acc: BigInt = 1): BigInt =
     if (n == 0) acc else factorial(n - 1, n * acc)
 
+  def factorial(n: Int): BigInt =
+    if (n == 1) 1
+      else n*factorial(n - 1)
+
+  factorial(100)
+
 }

@@ -3,18 +3,16 @@ package com.theory.implicits.scope.currentscope
 // a member of an enclosing template
 object EnclosingTemplate extends App {
 
-  implicit val b = new B 
+  implicit val b = "aloha" 
 
-  def run(implicit m: B) = {
+
+  def run(implicit m: String) = {
     //not prefix
-    println(m.hello)
+    println(m)
   }
 
   run
 
 }
 
-class B {
-  implicit val hello = "hello"
-}
 
