@@ -1,4 +1,4 @@
-package com.theory.implicits.scope.implicitscope
+package com.theory.implicits.scope.implicitscope.typeinquestion
 
 
 trait CanFoo[A] {

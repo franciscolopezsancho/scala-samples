@@ -1,4 +1,4 @@
-package com.theory.implicits.scope.implicitscope.companion1
+package com.theory.implicits.scope.implicitscope.typeinquestion
 
 object CompanionApp extends App {
 
