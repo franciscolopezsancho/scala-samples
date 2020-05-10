@@ -9,6 +9,6 @@ package object typeinquestion {
 
     def unsugaredFoo[A](x: A)(implicit canFoo: CanFoo[A]): String = canFoo.foos(x)
 
-    
-    
+    def f(implicit s: String): Map[Int,String] = ???
+
 }

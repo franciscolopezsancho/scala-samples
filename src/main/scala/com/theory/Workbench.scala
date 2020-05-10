@@ -10,14 +10,19 @@ import scala.concurrent.java8.FuturesConvertersImpl.P
 
 object Workbench extends App {
 
-  @scala.annotation.tailrec
-  def factorial(n: Int, acc: BigInt = 1): BigInt =
-    if (n == 0) acc else factorial(n - 1, n * acc)
+  def tuple[U,V](u: U, v: V)(implicit ev: V <:< U): Unit = {
+     println(u)
+     println(v)
+  }
 
-  def factorial(n: Int): BigInt =
-    if (n == 1) 1
-      else n*factorial(n - 1)
+  tuple(42,42)
 
-  factorial(100)
+
+  implicit class OptionOption[T](val oo: Option[Option[T]]) extends AnyVal {
+    def flattenMe: Option[T] = oo.flatMap(each => each)
+  }
+
+
+
 
 }

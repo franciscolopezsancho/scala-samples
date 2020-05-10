@@ -1,6 +1,6 @@
 package com.theory.implicits.scope.implicitscope
 
-class Extends extends A {
+class InheritanceYes extends A {
 
 println(implicitly[String])
 
