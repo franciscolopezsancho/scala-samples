@@ -75,9 +75,11 @@ object TryFailure extends App {
     ExecutionContext.fromExecutor(Executors.newFixedThreadPool(3))
 
   val p = Promise[String]()
-  p.tryFailure(new RuntimeException("br0ken"))
+
+  val gs = p.tryFailure(new RuntimeException("br0ken"))
  
   //notice how the app stops!! but the exception doesn't pop up this thread :|
+  println(s"did it fail? $gs")
 
 
 

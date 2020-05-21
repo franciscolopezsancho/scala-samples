@@ -272,13 +272,13 @@ object CancelFutureElegant extends App {
   })
 
 
-  // Thread.sleep(1500)
+  Thread.sleep(1500)
   println("let's  cancel!")
   futureResult.onComplete{
     case Success(value) => println(value)
     case Failure(exception) => println(exception)
   }
-  // val isCancelled = cancellator()
+  val isCancelled = cancellator()
   //println(s"computational cancelled is: $isCancelled")
   Thread.sleep(10000) // will let show the work Future is still doing 
   System.exit(0)
