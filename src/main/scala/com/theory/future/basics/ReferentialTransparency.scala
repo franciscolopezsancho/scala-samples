@@ -14,6 +14,8 @@ import scala.util.Random
  *
  * On scalaz Task or scalaIO Sync left and right are equal both point to an
  * asynchronous computation but don't execute it.
+ * 
+ *  After this example is more obvious why ANoParallelism
  *
  * see ANoParallelism
  * https://github.com/franciscolopezsancho/scala-samples/blob/master/src/main/scala/com/lightbend/future/problems/ANoParalelism.scala
@@ -22,46 +24,31 @@ import scala.util.Random
  * https://github.com/franciscolopezsancho/scala-samples/blob/master/src/main/scala/com/lightbend/future/basics/Bparalelism.scala
  *
  */
-object ReferentialTransparency {
+object ReferentialTransparency extends App {
+
 
   implicit val ec = ExecutionContext.fromExecutor(Executors.newFixedThreadPool(2))
 
+  val rand = Random
 
-  val f1  = Future(println("hello"))
+  val x = Future(Random.nextInt)
+ 
+  println((x, x))
 
+  val (y,z)= (Future(Random.nextInt), Future(Random.nextInt))
 
-  for {
-    a <- f1
-    b <- f1
-  } yield {
-    println("done 1")
-  }
-
-  val rand =  Random
-
-  for {
-    a <- Future(println("aloha"))
-    b <- Future(println("aloha"))
-  } yield {
-    println(a)
-    println(b)
-  }
+  Thread.sleep(100) // for the sake to show z completed
+  println((y, z))
 
 
-
-
-  val fb  = Future(rand.nextInt())
-
-  for {
-    a <- fb
-    b <- fb
-  } yield {
-    println(s"a: $a")
-    println(s"a: $b")
-  }
-
-
-
-
-
+  //(x,x) are equal
+  //(y,z) are not
+  // which proves the point that the reference is not the same that what's referenced
+  // there's not transparency in there. 
 }
+
+
+
+
+
+

@@ -57,8 +57,8 @@ trait Show[A] {
 object ImplicitConversions00 {
 
   //TODO do I need conversion?
-  def showing[T](a: T)(implicit monoid: Show[T]): String =
-    monoid.show(a)
+  def showing[T](a: T)(implicit myTrait: Show[T]): String =
+    myTrait.show(a)
 
 }
 

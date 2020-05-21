@@ -1,1 +1,1 @@
-java -jar cfr-0.148.jar /Users/francisco/Courses/workbench/target/scala-2.13/classes/com/theory/implicits/conversion/valueclass/PerksValueClass.class
+java -jar cfr-0.148.jar /Users/francisco/Courses/workbench/target/scala-2.13/classes/com/theory/types/typeerasure/TypeErasure.class

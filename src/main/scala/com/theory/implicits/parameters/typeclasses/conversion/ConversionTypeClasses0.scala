@@ -46,11 +46,6 @@ object ImplicitConversions0 {
    def showing(implicit typeClass: Show1[A]): String =
      typeClass.show(a)
  }
-// TODO  how can I do this with just a method sort of...
-// implicit def showOps[A](a: A) = {
- ////   def show(implicit typeClass: Show1[A]): String =
- ////     typeClass.show(a)
- //// }
 
 
 }

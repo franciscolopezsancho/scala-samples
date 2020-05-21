@@ -14,11 +14,11 @@ import scala.util.Random
 object FutureFailure extends App {
 
   implicit val ec = ExecutionContext.fromExecutor(Executors.newFixedThreadPool(10)) 
-  //do nothing about it, will ignore it. As get's a Try[Failure] and won't short circuit the map
+  //do nothing about it, will ignore it. As get's a Try[Failure] and will short circuit the map
   def silentVersionDivideAndAlter(num: BigInt, denom: BigInt, f: BigInt => Unit) =
     Future(num / denom).map(f)
 
-  //handle it like this
+  //handling it like this we now can handle the failure in an specific way
   def noisyVersionDivideAndAlter(num: BigInt, denom: BigInt, f: BigInt => Unit) =
     Future(num / denom).onComplete{
       case Success(value) => f(value)
@@ -27,7 +27,8 @@ object FutureFailure extends App {
 
     
 
-  //handle it like this
+  //handling it like this we can recover in case ...
+  // if not the case we are back to above @silentVersionDivideAndAlter
   def recoverFromZero(num: BigInt, denom: BigInt, f: BigInt => Unit) =
     Future(num / denom).
       recover { case ae: ArithmeticException => BigInt(0) }
@@ -35,7 +36,8 @@ object FutureFailure extends App {
 
 
 
-   //handle providing new Future to run 
+   //handling it like this we can recover with a PartialFunction[Throwable, Future[T]] 
+   // and execute another Future.
    def retrySideEffect(n: Int = 0, f:  => Unit): Future[Unit] = {
     if (n < 0) Future(f)
     else Future(f).recoverWith { case i:IllegalArgumentException =>
@@ -52,9 +54,11 @@ object FutureFailure extends App {
   
 
   // try one at a time 
+
+
   silentVersionDivideAndAlter(1, 0, println)
 
-  noisyVersionDivideAndAlter(1, 0, println)
+  // noisyVersionDivideAndAlter(1, 0, println)
 
   // recoverFromZero(1, 0, println)
 

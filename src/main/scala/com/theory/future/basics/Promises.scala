@@ -14,6 +14,7 @@ import java.io.File
 import cats.instances.list
 import java.util.concurrent.CancellationException
 import scala.util.Failure
+import scala.util.Random
 
 /**
   * instead of creating a Future as a read-only structure
@@ -31,13 +32,15 @@ import scala.util.Failure
   *
   * Let's see an example
   */
+
+
 object Promises extends App {
 
   implicit val ec =
     ExecutionContext.fromExecutor(Executors.newFixedThreadPool(3))
 
   val p1 = Promise[String]()
-  p1.future.foreach(x => println(s"finally done $x"))
+  p1.future.foreach(x => println(s"finally $x"))
 
   println("waiting till the promise gets real!!")
   //recommended to be explicit about it
